@@ -1,7 +1,8 @@
 package com.mitocode.service.impl;
 
 import com.mitocode.model.Patient;
-import com.mitocode.repository.IPatientRepository;
+import com.mitocode.repository.IGenericRepo;
+import com.mitocode.repository.IPatientRepo;
 import com.mitocode.service.IPatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,11 +11,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PatientService implements IPatientService {
+public class PatientService extends CRUDImpl<Patient, Integer> implements IPatientService {
 
-    private final IPatientRepository repository;
+    private final IPatientRepo repository;
 
     @Override
+    protected IGenericRepo<Patient, Integer> getRepo() {
+        return repository;
+    }
+
+    /*@Override
     public Patient save(Patient patient) {
         return repository.save(patient);
     }
@@ -37,5 +43,5 @@ public class PatientService implements IPatientService {
     @Override
     public void delete(Integer id) {
 
-    }
+    }*/
 }
